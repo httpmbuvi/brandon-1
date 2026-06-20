@@ -1,0 +1,97 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Inventory — Brandon Motors</title>
+<meta name="description" content="Browse our full car inventory.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head><body>
+<header class="header"><div class="container inner">
+<a href="index.html" class="logo"><span class="mark">B</span>Brandon<span class="accent">Motors</span></a>
+<nav class="nav" id="nav">
+<a href="index.html" class="">Home</a>
+<a href="inventory.html" class="active">Inventory</a>
+<a href="about.html" class="">About</a>
+<a href="contact.html" class="">Contact</a>
+<a href="admin.html" class="">Admin</a>
+</nav>
+<a href="inventory.html" class="btn">Browse Cars</a>
+<button class="mobile-toggle" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
+</div></header>
+<main>
+<section class="section"><div class="container">
+<h2>Full Inventory</h2><p class="sub">6 vehicles available · Filter by your preference.</p>
+<div class="filters">
+<input id="q" placeholder="Search make or model..." oninput="filter()">
+<select id="brand" onchange="filter()"><option value="">All brands</option><option>BMW</option><option>Mazda</option><option>Mercedes</option><option>Subaru</option><option>Tesla</option><option>Toyota</option></select>
+<select id="fuel" onchange="filter()"><option value="">All fuel</option><option>Petrol</option><option>Diesel</option><option>Electric</option><option>Hybrid</option></select>
+<select id="trans" onchange="filter()"><option value="">All transmissions</option><option>Automatic</option><option>Manual</option></select>
+</div>
+<div class="grid" id="cars"><a href="cars/prado-2019.html" class="card">
+<img src="assets/car-prado.jpg" alt="Toyota Land Cruiser Prado TX">
+<div class="body">
+<h3>Toyota Land Cruiser Prado TX</h3>
+<div class="meta">2019 · Toyota · SUV</div>
+<div class="specs"><span>⛽ Diesel</span><span>⚙ Automatic</span><span>📏 68,000 km</span></div>
+<div class="price">KES 7,500,000</div>
+</div></a><a href="cars/mercedes-c200-2020.html" class="card">
+<img src="assets/car-mercedes.jpg" alt="Mercedes-Benz C200 AMG Line">
+<div class="body">
+<h3>Mercedes-Benz C200 AMG Line</h3>
+<div class="meta">2020 · Mercedes · Sedan</div>
+<div class="specs"><span>⛽ Petrol</span><span>⚙ Automatic</span><span>📏 42,000 km</span></div>
+<div class="price">KES 5,900,000</div>
+</div></a><a href="cars/bmw-x5-2021.html" class="card">
+<img src="assets/car-bmw.jpg" alt="BMW X5 xDrive40i">
+<div class="body">
+<h3>BMW X5 xDrive40i</h3>
+<div class="meta">2021 · BMW · SUV</div>
+<div class="specs"><span>⛽ Petrol</span><span>⚙ Automatic</span><span>📏 35,000 km</span></div>
+<div class="price">KES 9,800,000</div>
+</div></a><a href="cars/mazda-cx5-2018.html" class="card">
+<img src="assets/car-mazda.jpg" alt="Mazda CX-5 Skyactiv">
+<div class="body">
+<h3>Mazda CX-5 Skyactiv</h3>
+<div class="meta">2018 · Mazda · SUV</div>
+<div class="specs"><span>⛽ Petrol</span><span>⚙ Automatic</span><span>📏 78,000 km</span></div>
+<div class="price">KES 2,950,000</div>
+</div></a><a href="cars/tesla-model3-2022.html" class="card">
+<img src="assets/car-tesla.jpg" alt="Tesla Model 3 Long Range">
+<div class="body">
+<h3>Tesla Model 3 Long Range</h3>
+<div class="meta">2022 · Tesla · Sedan</div>
+<div class="specs"><span>⛽ Electric</span><span>⚙ Automatic</span><span>📏 22,000 km</span></div>
+<div class="price">KES 6,200,000</div>
+</div></a><a href="cars/subaru-forester-2017.html" class="card">
+<img src="assets/car-subaru.jpg" alt="Subaru Forester XT">
+<div class="body">
+<h3>Subaru Forester XT</h3>
+<div class="meta">2017 · Subaru · SUV</div>
+<div class="specs"><span>⛽ Petrol</span><span>⚙ Automatic</span><span>📏 96,000 km</span></div>
+<div class="price">KES 2,350,000</div>
+</div></a></div>
+</div></section>
+<script>
+const cars=[{"id": "prado-2019", "name": "Toyota Land Cruiser Prado TX", "brand": "Toyota", "year": 2019, "price": 7500000, "mileage": 68000, "fuel": "Diesel", "transmission": "Automatic", "engine": "2.8L Turbo Diesel", "color": "Pearl White", "bodyType": "SUV", "image": "car-prado.jpg", "featured": true, "description": "Showroom-condition Prado TX with full service history. NTSA logbook verified, fresh import duty paid, ready for Kenyan roads from Nairobi to Turkana."}, {"id": "mercedes-c200-2020", "name": "Mercedes-Benz C200 AMG Line", "brand": "Mercedes", "year": 2020, "price": 5900000, "mileage": 42000, "fuel": "Petrol", "transmission": "Automatic", "engine": "2.0L Turbo", "color": "Iridium Silver", "bodyType": "Sedan", "image": "car-mercedes.jpg", "featured": true, "description": "Executive C-Class with AMG Line package, panoramic roof and Burmester sound. Locally maintained, accident-free."}, {"id": "bmw-x5-2021", "name": "BMW X5 xDrive40i", "brand": "BMW", "year": 2021, "price": 9800000, "mileage": 35000, "fuel": "Petrol", "transmission": "Automatic", "engine": "3.0L M Sport", "color": "Tanzanite Blue", "bodyType": "SUV", "image": "car-bmw.jpg", "featured": true, "description": "Loaded X5 with M Sport package, head-up display and laser lights. The benchmark luxury SUV for Kenyan terrain."}, {"id": "mazda-cx5-2018", "name": "Mazda CX-5 Skyactiv", "brand": "Mazda", "year": 2018, "price": 2950000, "mileage": 78000, "fuel": "Petrol", "transmission": "Automatic", "engine": "2.0L Skyactiv-G", "color": "Snowflake White", "bodyType": "SUV", "image": "car-mazda.jpg", "featured": false, "description": "Fuel-efficient family SUV. Perfect first car for upcountry trips with full leather interior and reverse camera."}, {"id": "tesla-model3-2022", "name": "Tesla Model 3 Long Range", "brand": "Tesla", "year": 2022, "price": 6200000, "mileage": 22000, "fuel": "Electric", "transmission": "Automatic", "engine": "Dual Motor AWD", "color": "Multi-Coat Red", "bodyType": "Sedan", "image": "car-tesla.jpg", "featured": true, "description": "Pure electric performance with 580 km range. Includes wall charger and free Supercharger credits."}, {"id": "subaru-forester-2017", "name": "Subaru Forester XT", "brand": "Subaru", "year": 2017, "price": 2350000, "mileage": 96000, "fuel": "Petrol", "transmission": "Automatic", "engine": "2.0L Turbo Boxer", "color": "Ice Silver", "bodyType": "SUV", "image": "car-subaru.jpg", "featured": false, "description": "Symmetrical AWD, great for safari weekends. Recently serviced with new tyres and brake pads."}];
+function filter(){
+  const q=document.getElementById('q').value.toLowerCase();
+  const b=document.getElementById('brand').value;
+  const f=document.getElementById('fuel').value;
+  const t=document.getElementById('trans').value;
+  const out=cars.filter(c=>(!q||c.name.toLowerCase().includes(q))&&(!b||c.brand===b)&&(!f||c.fuel===f)&&(!t||c.transmission===t));
+  document.getElementById('cars').innerHTML=out.map(c=>`<a href="cars/${c.id}.html" class="card"><img src="assets/${c.image}" alt="${c.name}"><div class="body"><h3>${c.name}</h3><div class="meta">${c.year} · ${c.brand} · ${c.bodyType}</div><div class="specs"><span>⛽ ${c.fuel}</span><span>⚙ ${c.transmission}</span><span>📏 ${c.mileage.toLocaleString()} km</span></div><div class="price">KES ${c.price.toLocaleString()}</div></div></a>`).join('')||'<p style="color:var(--muted)">No vehicles match those filters.</p>';
+}
+</script>
+</main>
+<footer class="footer"><div class="container">
+<div class="cols">
+<div><h4>Brandon Motors</h4><p>Kenya's trusted destination for premium, NTSA-verified vehicles. Based in Nairobi, serving the country.</p></div>
+<div><h4>Explore</h4><a href="inventory.html">Inventory</a><a href="about.html">About</a><a href="contact.html">Contact</a></div>
+<div><h4>Contact</h4><p>+254 799 219 777</p><p>Mombasa Road, Nairobi</p><p>sales@brandonmotors.co.ke</p></div>
+</div>
+<p style="border-top:1px solid var(--border);padding-top:1.5rem">© 2026 Brandon Motors. All rights reserved.</p>
+</div></footer>
+<a class="wa" href="https://wa.me/254799219777" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+<script src="assets/inventory-backend.js"></script>
+</body></html>

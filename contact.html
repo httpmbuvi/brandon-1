@@ -1,0 +1,50 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contact — Brandon Motors</title>
+<meta name="description" content="Contact Brandon Motors in Nairobi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head><body>
+<header class="header"><div class="container inner">
+<a href="index.html" class="logo"><span class="mark">B</span>Brandon<span class="accent">Motors</span></a>
+<nav class="nav" id="nav">
+<a href="index.html" class="">Home</a>
+<a href="inventory.html" class="">Inventory</a>
+<a href="about.html" class="">About</a>
+<a href="contact.html" class="active">Contact</a>
+<a href="admin.html" class="">Admin</a>
+</nav>
+<a href="inventory.html" class="btn">Browse Cars</a>
+<button class="mobile-toggle" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
+</div></header>
+<main>
+<section class="section"><div class="container">
+<p style="color:var(--primary);text-transform:uppercase;letter-spacing:.15em;font-size:.75rem">Get in Touch</p>
+<h2>Talk to our team.</h2><p class="sub">We respond within 30 minutes during business hours.</p>
+<div style="display:grid;grid-template-columns:1fr;gap:3rem" class="cgrid">
+<form class="form" onsubmit="event.preventDefault();window.location='https://wa.me/254799219777?text='+encodeURIComponent('Hi Brandon Motors, I am '+this.name.value+' ('+this.email.value+'). '+this.message.value)">
+<label><span>Your name</span><input name="name" required></label>
+<label><span>Email</span><input type="email" name="email" required></label>
+<label><span>Message</span><textarea name="message" rows="5" required></textarea></label>
+<button class="btn" type="submit">Send via WhatsApp</button>
+</form>
+<div>
+<div style="background:var(--card);border:1px solid var(--border);padding:1.5rem;border-radius:12px;margin-bottom:1rem"><h4 style="font-family:'Space Grotesk'">📍 Showroom</h4><p style="color:var(--muted);margin-top:.5rem">Mombasa Road, Nairobi, Kenya<br>Open Mon–Sat 8am–6pm</p></div>
+<div style="background:var(--card);border:1px solid var(--border);padding:1.5rem;border-radius:12px;margin-bottom:1rem"><h4 style="font-family:'Space Grotesk'">📞 Phone / WhatsApp</h4><p style="color:var(--muted);margin-top:.5rem">+254 799 219 777</p></div>
+<div style="background:var(--card);border:1px solid var(--border);padding:1.5rem;border-radius:12px"><h4 style="font-family:'Space Grotesk'">✉ Email</h4><p style="color:var(--muted);margin-top:.5rem">sales@brandonmotors.co.ke</p></div>
+</div>
+</div>
+</div></section>
+</main>
+<footer class="footer"><div class="container">
+<div class="cols">
+<div><h4>Brandon Motors</h4><p>Kenya's trusted destination for premium, NTSA-verified vehicles. Based in Nairobi, serving the country.</p></div>
+<div><h4>Explore</h4><a href="inventory.html">Inventory</a><a href="about.html">About</a><a href="contact.html">Contact</a></div>
+<div><h4>Contact</h4><p>+254 799 219 777</p><p>Mombasa Road, Nairobi</p><p>sales@brandonmotors.co.ke</p></div>
+</div>
+<p style="border-top:1px solid var(--border);padding-top:1.5rem">© 2026 Brandon Motors. All rights reserved.</p>
+</div></footer>
+<a class="wa" href="https://wa.me/254799219777" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+</body></html>

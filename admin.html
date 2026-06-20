@@ -1,0 +1,222 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin — Brandon Motors</title>
+<meta name="description" content="Brandon Motors admin dashboard.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head><body>
+<header class="header"><div class="container inner">
+<a href="index.html" class="logo"><span class="mark">B</span>Brandon<span class="accent">Motors</span></a>
+<nav class="nav" id="nav">
+<a href="index.html" class="">Home</a>
+<a href="inventory.html" class="">Inventory</a>
+<a href="about.html" class="">About</a>
+<a href="contact.html" class="">Contact</a>
+<a href="admin.html" class="active">Admin</a>
+</nav>
+<a href="inventory.html" class="btn">Browse Cars</a>
+<button class="mobile-toggle" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
+</div></header>
+<main>
+<section class="section"><div class="container" style="max-width:960px">
+<p style="color:var(--primary);text-transform:uppercase;letter-spacing:.15em;font-size:.75rem">Admin console</p>
+<h2 style="font-size:2.5rem;margin:.5rem 0 1.5rem">Manage Brandon Motors</h2>
+<p style="color:var(--muted);font-size:1.1rem;line-height:1.7">This dashboard is for internal operations. Review inventory totals, recent enquiries, and welcome insights from across the site.</p>
+<div class="stats" style="margin-top:3rem">
+<div class="stat"><div class="n">6</div><div class="l">Active Listings</div></div>
+<div class="stat"><div class="n">24</div><div class="l">New Leads</div></div>
+<div class="stat"><div class="n">98%</div><div class="l">Response Rate</div></div>
+<div class="stat"><div class="n">1.2K</div><div class="l">Monthly Visitors</div></div>
+</div>
+<div style="display:grid;grid-template-columns:1fr;gap:1.5rem;margin-top:3rem">
+<div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem">
+<h3 style="font-family:'Space Grotesk';margin-bottom:.75rem">Quick actions</h3>
+<ul style="color:var(--muted);line-height:1.8;list-style:disc;padding-left:1.25rem;margin:0">
+<li>Review new customer enquiries.</li>
+<li>Update listings and pricing.</li>
+<li>Track showroom appointments.</li>
+<li>Verify NTSA checks and documents.</li>
+</ul>
+</div>
+<div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem">
+<h3 style="font-family:'Space Grotesk';margin-bottom:.75rem">Recent activity</h3>
+<p style="color:var(--muted);margin:0">No new requests yet. When connected to a backend, this section can show the latest customer messages, booking alerts, and inventory changes.</p>
+</div>
+</div>
+</div></section>
+<section class="section"><div class="container" style="max-width:960px">
+<p style="color:var(--primary);text-transform:uppercase;letter-spacing:.15em;font-size:.75rem">Inventory management</p>
+<h2 style="font-size:2.5rem;margin:.5rem 0 1.5rem">Edit car listings</h2>
+<p class="sub">Choose a vehicle and update its details. Changes are saved locally in your browser.</p>
+<div style="display:grid;gap:2rem">
+<div id="carList" class="admin-list"></div>
+<form id="carForm" class="form" style="margin-top:1rem">
+<div class="row"><label><span>Car</span><select id="carSelect" onchange="selectCar(this.value)"></select></label><label><span>Featured</span><input type="checkbox" id="featured"></label></div>
+<div class="row"><label class="wide"><span>Model name</span><input id="name" required></label></div>
+<div class="row"><label><span>Brand</span><input id="brand" required></label><label><span>Year</span><input id="year" type="number" min="1900" max="2100" required></label></div>
+<div class="row"><label><span>Price (KES)</span><input id="price" type="number" min="0" required></label><label><span>Mileage (km)</span><input id="mileage" type="number" min="0" required></label></div>
+<div class="row"><label><span>Fuel</span><input id="fuel" required></label><label><span>Transmission</span><input id="transmission" required></label></div>
+<div class="row"><label><span>Engine</span><input id="engine"></label><label><span>Color</span><input id="color"></label></div>
+<div class="row"><label><span>Body type</span><input id="bodyType"></label><label><span>Image file / URL</span><input id="image"></label></div>
+<div class="row"><label><span>Upload photo</span><input id="imageUpload" type="file" accept="image/*"></label><label><span>Upload clip</span><input id="clipUpload" type="file" accept="video/*"></label></div>
+<label class="wide"><span>Description</span><textarea id="description" rows="4"></textarea></label>
+<div id="mediaPreview" class="media-preview" style="display:none">
+<div class="preview-box"><strong>Photo preview</strong><img id="imagePreview" alt="Image preview"></div>
+<div class="preview-box"><strong>Clip preview</strong><video id="clipPreview" controls></video></div>
+</div>
+<button class="btn" type="submit">Save changes</button>
+<p id="saveMessage" class="admin-message"></p>
+</form>
+</div>
+</div></section>
+</main>
+<script>
+const defaultCars=[{"id":"prado-2019","name":"Toyota Land Cruiser Prado TX","brand":"Toyota","year":2019,"price":7500000,"mileage":68000,"fuel":"Diesel","transmission":"Automatic","engine":"2.8L Turbo Diesel","color":"Pearl White","bodyType":"SUV","image":"car-prado.jpg","featured":true,"description":"Showroom-condition Prado TX with full service history. NTSA logbook verified, fresh import duty paid, ready for Kenyan roads from Nairobi to Turkana."},{"id":"mercedes-c200-2020","name":"Mercedes-Benz C200 AMG Line","brand":"Mercedes","year":2020,"price":5900000,"mileage":42000,"fuel":"Petrol","transmission":"Automatic","engine":"2.0L Turbo","color":"Iridium Silver","bodyType":"Sedan","image":"car-mercedes.jpg","featured":true,"description":"Executive C-Class with AMG Line package, panoramic roof and Burmester sound. Locally maintained, accident-free."},{"id":"bmw-x5-2021","name":"BMW X5 xDrive40i","brand":"BMW","year":2021,"price":9800000,"mileage":35000,"fuel":"Petrol","transmission":"Automatic","engine":"3.0L M Sport","color":"Tanzanite Blue","bodyType":"SUV","image":"car-bmw.jpg","featured":true,"description":"Loaded X5 with M Sport package, head-up display and laser lights. The benchmark luxury SUV for Kenyan terrain."},{"id":"mazda-cx5-2018","name":"Mazda CX-5 Skyactiv","brand":"Mazda","year":2018,"price":2950000,"mileage":78000,"fuel":"Petrol","transmission":"Automatic","engine":"2.0L Skyactiv-G","color":"Snowflake White","bodyType":"SUV","image":"car-mazda.jpg","featured":false,"description":"Fuel-efficient family SUV. Perfect first car for upcountry trips with full leather interior and reverse camera."},{"id":"tesla-model3-2022","name":"Tesla Model 3 Long Range","brand":"Tesla","year":2022,"price":6200000,"mileage":22000,"fuel":"Electric","transmission":"Automatic","engine":"Dual Motor AWD","color":"Multi-Coat Red","bodyType":"Sedan","image":"car-tesla.jpg","featured":true,"description":"Pure electric performance with 580 km range. Includes wall charger and free Supercharger credits."},{"id":"subaru-forester-2017","name":"Subaru Forester XT","brand":"Subaru","year":2017,"price":2350000,"mileage":96000,"fuel":"Petrol","transmission":"Automatic","engine":"2.0L Turbo Boxer","color":"Ice Silver","bodyType":"SUV","image":"car-subaru.jpg","featured":false,"description":"Symmetrical AWD, great for safari weekends. Recently serviced with new tyres and brake pads."}];
+let cars=loadCars();
+let currentId=cars[0]?.id;
+let currentImageData='';
+let currentClipData='';
+function loadCars(){
+  const stored=localStorage.getItem('brandonMotorsCars');
+  if(stored){try{return JSON.parse(stored);}catch(e){}}
+  localStorage.setItem('brandonMotorsCars',JSON.stringify(defaultCars));
+  return JSON.parse(JSON.stringify(defaultCars));
+}
+function saveCars(){localStorage.setItem('brandonMotorsCars',JSON.stringify(cars));}
+function renderCarList(){
+  const list=document.getElementById('carList');
+  list.innerHTML=cars.map(car=>`<div class="admin-item"><div><strong>${car.name}</strong><div style="color:var(--muted);font-size:.9rem">${car.year} · ${car.brand} · ${car.bodyType}</div></div><button type="button" onclick="selectCar('${car.id}')">Edit</button></div>`).join('');
+}
+function populateSelect(){
+  const select=document.getElementById('carSelect');
+  select.innerHTML=cars.map(car=>`<option value="${car.id}">${car.name}</option>`).join('');
+}
+function setPreviewVisibility(show){
+  document.getElementById('mediaPreview').style.display=show ? 'grid' : 'none';
+}
+function renderMediaPreview(car){
+  const imagePreview=document.getElementById('imagePreview');
+  const clipPreview=document.getElementById('clipPreview');
+  if(car.imageData){
+    imagePreview.src=car.imageData;
+    imagePreview.style.display='block';
+  } else if(car.image){
+    imagePreview.src='assets/'+car.image;
+    imagePreview.style.display='block';
+  } else {
+    imagePreview.removeAttribute('src');
+    imagePreview.style.display='none';
+  }
+  if(car.clipData){
+    clipPreview.src=car.clipData;
+    clipPreview.style.display='block';
+  } else {
+    clipPreview.removeAttribute('src');
+    clipPreview.style.display='none';
+  }
+  setPreviewVisibility(!!(car.imageData||car.image||car.clipData));
+}
+function selectCar(id){
+  currentId=id;
+  const car=cars.find(item=>item.id===id);
+  if(!car) return;
+  currentImageData='';
+  currentClipData='';
+  document.getElementById('carSelect').value=id;
+  document.getElementById('featured').checked=car.featured;
+  document.getElementById('name').value=car.name;
+  document.getElementById('brand').value=car.brand;
+  document.getElementById('year').value=car.year;
+  document.getElementById('price').value=car.price;
+  document.getElementById('mileage').value=car.mileage;
+  document.getElementById('fuel').value=car.fuel;
+  document.getElementById('transmission').value=car.transmission;
+  document.getElementById('engine').value=car.engine;
+  document.getElementById('color').value=car.color;
+  document.getElementById('bodyType').value=car.bodyType;
+  document.getElementById('image').value=car.image;
+  document.getElementById('description').value=car.description;
+  document.getElementById('imageUpload').value='';
+  document.getElementById('clipUpload').value='';
+  renderMediaPreview(car);
+}
+function showMessage(text){
+  const msg=document.getElementById('saveMessage');
+  msg.textContent=text;
+  setTimeout(()=>{msg.textContent='';},3000);
+}
+function getField(id){return document.getElementById(id).value;}
+function handleFileUpload(file, callback){
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=function(){callback(reader.result);};
+  reader.readAsDataURL(file);
+}
+function handleImageUpload(event){
+  const file=event.target.files[0];
+  handleFileUpload(file, dataUrl=>{
+    currentImageData=dataUrl;
+    const car=cars.find(item=>item.id===currentId);
+    if(car){
+      car.imageData=dataUrl;
+      renderMediaPreview(car);
+    }
+  });
+}
+function handleClipUpload(event){
+  const file=event.target.files[0];
+  handleFileUpload(file, dataUrl=>{
+    currentClipData=dataUrl;
+    const car=cars.find(item=>item.id===currentId);
+    if(car){
+      car.clipData=dataUrl;
+      renderMediaPreview(car);
+    }
+  });
+}
+function handleSubmit(event){
+  event.preventDefault();
+  const car=cars.find(item=>item.id===currentId);
+  if(!car) return;
+  car.featured=document.getElementById('featured').checked;
+  car.name=getField('name');
+  car.brand=getField('brand');
+  car.year=Number(getField('year'))||car.year;
+  car.price=Number(getField('price'))||car.price;
+  car.mileage=Number(getField('mileage'))||car.mileage;
+  car.fuel=getField('fuel');
+  car.transmission=getField('transmission');
+  car.engine=getField('engine');
+  car.color=getField('color');
+  car.bodyType=getField('bodyType');
+  car.image=getField('image');
+  car.description=getField('description');
+  if(currentImageData){car.imageData=currentImageData;}
+  if(currentClipData){car.clipData=currentClipData;}
+  saveCars();
+  renderCarList();
+  showMessage('Car details saved locally.');
+}
+function initAdmin(){
+  populateSelect();
+  renderCarList();
+  if(currentId) selectCar(currentId);
+  document.getElementById('carForm').addEventListener('submit', handleSubmit);
+  document.getElementById('imageUpload').addEventListener('change', handleImageUpload);
+  document.getElementById('clipUpload').addEventListener('change', handleClipUpload);
+}
+window.addEventListener('DOMContentLoaded', initAdmin);
+</script>
+<footer class="footer"><div class="container">
+<div class="cols">
+<div><h4>Brandon Motors</h4><p>Kenya's trusted destination for premium, NTSA-verified vehicles. Based in Nairobi, serving the country.</p></div>
+<div><h4>Explore</h4><a href="inventory.html">Inventory</a><a href="about.html">About</a><a href="contact.html">Contact</a></div>
+<div><h4>Contact</h4><p>+254 799 219 777</p><p>Mombasa Road, Nairobi</p><p>sales@brandonmotors.co.ke</p></div>
+</div>
+<p style="border-top:1px solid var(--border);padding-top:1.5rem">© 2026 Brandon Motors. All rights reserved.</p>
+</div></footer>
+<a class="wa" href="https://wa.me/254799219777" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+<script src="assets/admin-backend.js"></script>
+</body></html>
